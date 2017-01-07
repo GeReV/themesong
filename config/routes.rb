@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :youtube, only: :index
+
+  root to: 'home#index'
 end

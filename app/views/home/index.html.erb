@@ -1,0 +1,27 @@
+<input type="text" name="url" class="youtube-url" />
+<button class="youtube-send">Send</button>
+<div class="log">
+
+</div>
+
+<script>
+  (function() {
+    var button = document.querySelector('.youtube-send');
+    var input = document.querySelector('.youtube-url');
+    var log = document.querySelector('.log');
+
+    button.addEventListener('click', function(e) {
+      App.youtube.send({ url: input.value });
+    }, false);
+
+    App.youtube = App.cable.subscriptions.create('YoutubeChannel', {
+      received: function(data) {
+        var line = document.createElement('p');
+        line.textContent = JSON.stringify(data);
+
+        log.appendChild(line);
+      }
+    });
+  }());
+
+</script>
